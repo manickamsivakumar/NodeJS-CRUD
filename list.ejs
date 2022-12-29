@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataList</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/datatable.css" rel="stylesheet" />
+    <script src="./js/jquery.js"></script>
+    <script src="./js/datatable.js"></script>
+    <style>
+        td{
+            text-align:center;
+        }
+        .floating_div{
+            float:right;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="Wrapper">
+        <div class="floating_div"><a href="/add" ><button>New</button></a></div>
+  <table id="datatable">
+    <thead>
+        <th>S.no</th>
+        <th>Name</th>
+        <th>Phone No</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </thead>
+    <tbody>
+        <% if(results.length){
+            var i=0
+            results.forEach((val,key)=>{  i++;%>
+                <tr>
+                    <td><%= i %> </td>
+                    <td><%= val['name'] %></td>
+                    <td><%= val['phoneno'] %></td>
+                    <td><%= val['email'] %></td>
+                    <td><%= val['gender'] %></td>
+                    <td><%= val['date'] %></td>
+                    <td><a href="/getuser?id=<%= val['id'] %>"/><button>Edit</button></a></td>
+                    <td><a href="/deleteuser?id=<%= val['id'] %>"/><button>Delete</button></a></td>
+                </tr>
+          <%  })
+            %>
+            <% } else{ %>
+                <tr>
+                    <td colspan="8">No Records Found !!</td>
+                </tr>
+            <% }%>
+       
+    </tbody>
+  </table>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+          $("#datatable").dataTable();
+        })
+    </script>
+</body>
+</html>

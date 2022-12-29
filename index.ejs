@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/datatable.css" rel="stylesheet" />
+    <script src="./js/jquery.js"></script>
+    <script src="./js/datatable.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="contact">
+            <h3>Student Login</h3>
+            <h4>Hope you insert a correct data!</h4>
+            <input type="hidden" value="<%=(id) ? id : 0 %>" id="sid" />
+            <fieldset>
+                <input placeholder="Your name" type="text" value="<%=(name) ? name : '' %>" id="sname" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Your DOB " type="date" value="<%=(date) ? date : '' %>" id="sdob" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Your Email Address" type="email" value="<%=(email) ? email : '' %>" id="semail" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Your Phone Number" type="tel" value="<%=(phoneno) ? phoneno : '' %>" id="sphoneno" tabindex="3" required>
+            </fieldset>
+            <fieldset>
+                <input placeholder="gender" type="text" tabindex="4" value="<%=gender ? gender : '' %>" id="sgender" required>
+            </fieldset>
+            <fieldset>
+                <button name="submit" type="submit" id="contact-submit"  data-submit="...Sending">Submit</button>
+            </fieldset>
+        </div>
+    </div>
+
+    <script>
+        $('#contact-submit').on("click", function () {
+            let name = sname.value;
+            let email = semail.value;
+            let phone = sphoneno.value;
+            let gender = sgender.value;
+            let dob = sdob.value;
+            let id=sid.value;
+            $.ajax({
+                url: '/post',
+                type: 'post',
+                data: { id,name, email, phone, gender, dob },
+                datatype: 'json',
+                success: function (res) {
+                   if(res=='success'){
+                    location.href="/";
+                   }
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>
